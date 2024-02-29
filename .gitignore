@@ -1,0 +1,8 @@
+.vscode/
+build/
+node_modules/
+.eslintrc.json
+.npmrc
+package-lock.json
+yarn.lock
+.env
