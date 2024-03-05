@@ -14,7 +14,6 @@ const UserLists = ({
   gameStarted,
   joinedState,
 }) => {
-
   const renderStartGameButton = () => {
     return (
       <center>
@@ -39,25 +38,25 @@ const UserLists = ({
           Contestants:
         </CardTitle>
         <CardBody>
-          <ListGroup flush style={ styles.userListStyle }>
+          <ListGroup flush style={styles.userListStyle}>
             {joinedUsers &&
               joinedUsers.map((user, index) => (
                 <ListGroupItem
-                  key={index}
+                  key={user.user_id}
                   className="d-flex align-items-center p-1"
-                  style={ styles.userItemStyle }
+                  style={styles.userItemStyle}
                 >
                   <div className="d-flex align-items-center p-2">
                     <img
                       // src={user.avatar}
-                      src="assets/images/users/user2.jpg"
+                      src={user.avatar}
                       className="rounded-circle"
                       alt="avatar"
                       width="35"
                       height="35"
                     />
                     <div className="ms-3">
-                      <h4 className="mb-0">{user.name}</h4>
+                      <h4 className="mb-0">{user.username}</h4>
                     </div>
                   </div>
                   <h5 className="ms-auto">{user.point} points</h5>
@@ -81,7 +80,7 @@ const styles = {
     maxWidth: 350,
     marginTop: "auto",
     marginBottom: "auto",
-    marginRight: 50
+    marginRight: 50,
   },
   userListStyle: {
     margin: 0,
@@ -90,7 +89,6 @@ const styles = {
     backgroundColor: "transparent",
     padding: 0,
   },
-
 };
 
 UserLists.propTypes = {

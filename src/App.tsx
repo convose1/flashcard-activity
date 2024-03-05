@@ -1,11 +1,16 @@
-import { useRoutes } from "react-router-dom";
-import Themeroutes from "./routes/Router";
+import { Route, Routes } from "react-router-dom";
+
 import React from "react";
+import FlashCard from "./layouts/FlashCard";
 
 const App = () => {
-  const routing = useRoutes(Themeroutes);
-
-  return <div className="dark">{routing}</div>;
+  return (
+    <div>
+      <Routes>
+        <Route path="/" element={<FlashCard />}></Route>
+      </Routes>
+    </div>
+  );
 };
 
 export default App;

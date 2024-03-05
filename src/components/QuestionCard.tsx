@@ -1,5 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { Button, Card, CardBody, CardTitle} from "reactstrap";
+import { Button, Card, CardBody, CardTitle } from "reactstrap";
 import PropTypes from "prop-types";
 
 const QuestionCard = ({
@@ -7,31 +7,45 @@ const QuestionCard = ({
   options,
   handleMarkOption,
   joinedState,
-  currentQuestionNum,
+  questionIndex,
   gameStarted,
   hidden,
+  correct,
 }) => {
+  const { status, index } = correct;
   return (
     <>
-      <Card style={styles.quizCardStyle} hidden={ hidden }>
+      <Card style={styles.quizCardStyle} hidden={hidden}>
         <CardTitle tag="h4" className="text-left p-2 mb-0">
-          {currentQuestionNum} / 15
+          {questionIndex + 1} / 56
         </CardTitle>
-        <CardTitle tag="h3" className="mb-0 text-center" style={ styles.quizTitleStyle }>
+        <CardTitle
+          tag="h3"
+          className="mb-0 text-center"
+          style={styles.quizTitleStyle}
+        >
           {content}
         </CardTitle>
         <CardBody className="text-center">
           <div style={{ ...styles.quizBodyStyle, flexDirection: "column" }}>
-            {options.map((option: string, index: number) => (
-              <div key={index} style={ styles.quizItemStyle }>
+            {options.map((option: string, indx: number) => (
+              <div key={indx} style={styles.quizItemStyle}>
                 <Button
                   className="btn rounded-pill"
                   color="info"
                   size="lg"
                   block
                   disabled={joinedState && gameStarted ? false : true}
-                  onClick={() => handleMarkOption(option, index)}
-                  style={ styles.quizButtonStyle }
+                  onClick={() => handleMarkOption(option, indx)}
+                  style={{
+                    ...styles.quizButtonStyle,
+                    ...(status == "correct" &&
+                      indx == index &&
+                      styles.quizButtonCorrect),
+                    ...(status == "incorrect" &&
+                      indx == index &&
+                      styles.quizButtonIncorrect),
+                  }}
                 >
                   {option}
                 </Button>
@@ -54,25 +68,34 @@ const styles = {
     maxWidth: 550,
     marginTop: "auto",
     marginBottom: "auto",
-    marginLeft: 50
+    marginLeft: 50,
+  },
+  notCorrectAnswer: {
+    backgroundColor: "red",
   },
   quizTitleStyle: {
     paddingLeft: 70,
     paddingRight: 70,
     fontWeight: "bold",
-    fontFamily: "nunito"
+    fontFamily: "nunito",
   },
   quizBodyStyle: {
     display: "flex",
-    alignItems: "stretch"
+    alignItems: "stretch",
   },
   quizItemStyle: {
-    margin: "10px 50px 10px 50px"
+    margin: "10px 50px 10px 50px",
   },
   quizButtonStyle: {
     padding: 5,
     fontWeight: "bold",
-    fontSize: "1.5em"
+    fontSize: "1.5em",
+  },
+  quizButtonCorrect: {
+    backgroundColor: "green",
+  },
+  quizButtonIncorrect: {
+    backgroundColor: "red",
   },
 };
 
