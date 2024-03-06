@@ -34,8 +34,6 @@ const FlashCard = () => {
 
   useEffect(() => {
     socket.on("users_state_refreshed", (users) => {
-      console.log("users ----", users);
-
       if (users) {
         setJoinedUsers(users.filter((user) => user.joined));
         setWaitingUsers(users.filter((user) => !user.joined));
